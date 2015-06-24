@@ -29,7 +29,9 @@ public class Game {
                 case "PA":
                     if(cont==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -53,7 +55,9 @@ public class Game {
                 case "AZ":
                     if(cont1==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -77,7 +81,9 @@ public class Game {
                 case "SM":
                     if(cont2==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -101,7 +107,9 @@ public class Game {
                 case "DT":
                     if(cont3==0||cont==1&&dificultad==5){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -119,7 +127,9 @@ public class Game {
                     }
                     }else if(cont3==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -149,8 +159,10 @@ public class Game {
              switch(tipo){
                 case "PA":
                     if(cont==0){
-                    System.out.println("Ingrese posicion.");
+                   System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -174,7 +186,9 @@ public class Game {
                 case "AZ":
                     if(cont1==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -198,7 +212,9 @@ public class Game {
                 case "SM":
                     if(cont2==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -222,7 +238,9 @@ public class Game {
                 case "DT":
                     if(cont3==0||cont==1&&dificultad==5){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -240,7 +258,9 @@ public class Game {
                     }
                     }else if(cont3==0){
                     System.out.println("Ingrese posicion.");
+                    System.out.println("Fila: ");
                     x = lea.nextInt();
+                    System.out.println("Columna: ");
                     y = lea.nextInt();
                     x=x-1;
                     y=y-1;
@@ -313,16 +333,16 @@ public class Game {
         }
         }while(BOOLEANO==true);
         if(x>=0&&x<=8&&y>=0&&y<=8){
-            if(player2[x][y] == null){
+            if(player2[x][y] != null){
                 if (player2[x][y].getBoatHp() != 0) {
-                    player2[x][y].setHit(true);
+                    player2[x][y].gotHit();
                     alterar_player2();
-                }else{
-                    player2[x][y] = null;
-                    if (checkWin()) {
+                    }else{
+                        player2[x][y] = null;
+                        if (checkWin()) {
                         score_player1++;
                         return false;
-                    }
+                        }
                 }
                 map[x][y] = "X";
                 return true;
@@ -333,7 +353,7 @@ public class Game {
         }else{
             System.out.println("La posicion no es valida.");
         }
-        return false;
+        return true;
     }
         
         public boolean attackPlayer2(){
@@ -358,9 +378,9 @@ public class Game {
         }
         }while(o==true);
         if(x>=0&&x<=8&&y>=0&&y<=8){
-            if(player1[x][y] == null){
+            if(player1[x][y] != null){
                 if (player1[x][y].getBoatHp() != 0) {
-                    player1[x][y].setHit(true);
+                    player1[x][y].gotHit();
                     alterar_player1();
                 }else{
                     player1[x][y] = null;
@@ -437,15 +457,17 @@ public class Game {
     }
     public void alterar_player1(){
         Random R = new Random();
-        Boats[] botes = new Boats[5];
+        Boats[] botes = new Boats[10];
         int pos=0;
         int cantidad_barcos=0;
         for (int i = 0; i < player1.length; i++) {
             for (int j = 0; j < player1[i].length; j++) {
                 if (player1[i][j] != null) {
+                    System.out.println(player1[i][j].getTipodebote());
                     cantidad_barcos++;
                     botes[pos] = player1[i][j];
                     pos++;
+                    player1[i][j] = null;
                 }
             }
         }
@@ -455,15 +477,17 @@ public class Game {
     }
     public void alterar_player2(){
         Random R = new Random();
-        Boats[] botes = new Boats[5];
+        Boats[] botes = new Boats[10];
         int pos=0;
         int cantidad_barcos=0;
         for (int i = 0; i < player2.length; i++) {
             for (int j = 0; j < player2[i].length; j++) {
                 if (player2[i][j] != null) {
+                    System.out.println(player2[i][j].getTipodebote());
                     cantidad_barcos++;
                     botes[pos] = player2[i][j];
                     pos++;
+                    player2[i][j] = null;
                 }
             }
         }

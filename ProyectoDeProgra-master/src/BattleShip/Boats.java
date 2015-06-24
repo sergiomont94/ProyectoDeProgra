@@ -102,9 +102,9 @@ public class Boats {
         return hit;
     }
 
-    public void setHit(boolean hit) {
-        this.hit = hit;
+    public void gotHit() {
         this.boatHp--;
+        
     }
 
     public boolean isIsBoat() {
